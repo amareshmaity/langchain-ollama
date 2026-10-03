@@ -59,7 +59,7 @@ document = loader.load()
 
 splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
 chunks = splitter.split_documents(documents=document)
-store = Chroma.from_documents(documents=chunks, embedding=OllamaEmbeddings(model="mxbai-embed-large:latest"))
+store = Chroma.from_documents(documents=chunks, embedding=OllamaEmbeddings(model="qwen3-embedding:latest"))
 
 retriver = store.as_retriever(search_kwargs={"k":3})
 
@@ -68,7 +68,7 @@ prompt = ChatPromptTemplate.from_messages([
     ("human", "{question}")
 ])
 
-model = ChatOllama(model="deepseek-r1:1.5b")
+model = ChatOllama(model="qwen3:30b")
 parser = StrOutputParser()
 
 chain = (
